@@ -1,0 +1,13 @@
+function toSnakeCase(input) {
+    if (input == null) return '';
+    const str = String(input)
+        .normalize('NFKD')                      // remove accents
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/([a-z0-9])([A-Z])/g, '$1_$2') // split camelCase
+        .replace(/[^A-Za-z0-9]+/g, '_')         // non-alnum -> underscore
+        .replace(/^_+|_+$/g, '')                // trim edge underscores
+        .toLowerCase();
+    return str;
+}
+
+module.exports = toSnakeCase;
